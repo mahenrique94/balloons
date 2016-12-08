@@ -1,0 +1,80 @@
+.balloon, .balloon__head, .balloon__leg, .balloon__cord {
+  background: #000;
+  position: absolute; }
+
+.cloud--1, .cloud--2, .cloud--3, .cloud--4, .cloud--5 {
+  background: #F2F2F2;
+  position: absolute; }
+
+@keyframes upping {
+  0% {
+    top: 550px; }
+  100% {
+    top: -700px; } }
+.balloon {
+  border-radius: 80% 80% 100% 100%;
+  height: 100px;
+  width: 60px;
+  animation: upping 3s cubic-bezier(0.93, 0.57, 0.34, 0.11);
+  animation-fill-mode: forwards; }
+
+.balloon__head {
+  left: 13px;
+  top: -2px;
+  border-radius: 80% 80% 0 0;
+  height: 30px;
+  width: 32px; }
+
+.balloon__leg {
+  left: 20px;
+  top: 90px;
+  border-radius: 0 0 80% 80%;
+  height: 25px;
+  width: 20px; }
+
+.balloon__cord {
+  left: 38px;
+  top: 110px;
+  height: 60px;
+  width: 2px;
+  background: #808080;
+  transform: skew(20deg, 30deg); }
+
+.cloud--1 {
+  border-radius: 580px 510px 70px 85px;
+  height: 100px;
+  width: 350px; }
+
+.cloud--2 {
+  border-radius: 90% 100% 0 0;
+  height: 70px;
+  left: 70px;
+  top: -25px;
+  width: 150px; }
+
+.cloud--3 {
+  border-radius: 90% 100% 0 0;
+  height: 70px;
+  left: 180px;
+  top: -25px;
+  width: 150px; }
+
+.cloud--4 {
+  border-radius: 0 0 90% 100%;
+  height: 50px;
+  left: 1px;
+  top: 70px;
+  width: 150px; }
+
+.cloud--5 {
+  border-radius: 0 0 90% 100%;
+  height: 50px;
+  left: 130px;
+  top: 80px;
+  width: 220px; }
+
+body {
+  background: #4DB8FF;
+  overflow: hidden; }
+
+/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,25 @@
+////
+// CLOUD
+////
+@mixin cloud($identifier)
+    @extend %cloud
+    border-radius: unquote(map-get($cloud-radius, $identifier))
+    height: unquote(map-get($cloud-heights, $identifier))
+    left: unquote(map-get($cloud-lefts, $identifier))
+    top: unquote(map-get($cloud-tops, $identifier))
+    width: unquote(map-get($cloud-widths, $identifier))
+
+////
+// BALLOON
+////
+@mixin properties($type)
+    @extend %balloon
+    @if $type != balloon
+        @include cordenates($type)
+    border-radius: unquote(map-get($balloon-radius, $type))
+    height: unquote(map-get($balloon-heights, $type))
+    width: unquote(map-get($balloon-widths, $type))
+
+@mixin cordenates($type)
+    left: unquote(map-get($balloon-lefts, $type))
+    top: unquote(map-get($balloon-tops, $type))

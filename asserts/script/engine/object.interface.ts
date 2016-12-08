@@ -1,0 +1,3 @@
+interface Obj {
+	create() : HTMLObjectElement;
+}

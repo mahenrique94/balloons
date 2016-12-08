@@ -1,0 +1,9 @@
+@each $type in $types
+    .#{$type}
+        @include properties($type)
+        @if $type == balloon
+            animation: upping 3s cubic-bezier(.93, .57, .34, .11)
+            animation-fill-mode: forwards
+        @else if $type == balloon__cord     
+            background: #808080
+            transform: skew(20deg, 30deg)

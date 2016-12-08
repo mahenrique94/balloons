@@ -8,7 +8,7 @@ class Head implements Obj {
 
     public create() : HTMLObjectElement {
         let element : HTMLObjectElement = document.createElement('SPAN');
-        element.classList.add('balloon__head');
+        element.classList.add('o-balloon__head');
         element.style.background = this._color;
         return element;
     }

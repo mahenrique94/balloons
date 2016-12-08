@@ -1,5 +1,5 @@
 @each $type in $types
-    .#{$type}
+    .o-#{$type}
         @include properties($type)
         @if $type == balloon
             animation: upping 3s cubic-bezier(.93, .57, .34, .11)

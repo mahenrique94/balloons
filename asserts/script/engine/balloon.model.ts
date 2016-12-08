@@ -15,11 +15,11 @@ class Balloon implements Obj {
     public create() : HTMLObjetElement {
         let element : HTMLObjetElement = document.createElement('DIV');
         let color : string = this._getColor();
-        element.classList.add('balloon');
+        element.classList.add('o-balloon');
         element.appendChild(new Cord().create());
         element.appendChild(new Head(color).create());
         element.appendChild(new Leg(color).create());
-        element.style.left = this._left + "px";
+        element.style.left = `${this._left}px`;
         element.style.background = color;
         return element;
     }

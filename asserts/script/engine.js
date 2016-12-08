@@ -11,7 +11,7 @@ var Balloon = (function () {
     Balloon.prototype.create = function () {
         var element = document.createElement('DIV');
         var color = this._getColor();
-        element.classList.add('balloon');
+        element.classList.add('o-balloon');
         element.appendChild(new Cord().create());
         element.appendChild(new Head(color).create());
         element.appendChild(new Leg(color).create());
@@ -25,12 +25,31 @@ var Balloon = (function () {
     };
     return Balloon;
 }());
+var Cloud = (function () {
+    function Cloud(top, left) {
+        this._top = top;
+        this._left = left;
+    }
+    Cloud.prototype.create = function () {
+        var cloud = document.createElement('DIV');
+        cloud.classList.add('o-cloud--1');
+        cloud.style.top = this._top + "px";
+        cloud.style.left = this._left + "px";
+        for (var i = 2; i <= 5; i++) {
+            var child = document.createElement('SPAN');
+            child.classList.add("o-cloud--" + i);
+            cloud.appendChild(child);
+        }
+        return cloud;
+    };
+    return Cloud;
+}());
 var Cord = (function () {
     function Cord() {
     }
     Cord.prototype.create = function () {
         var element = document.createElement('SPAN');
-        element.classList.add('balloon__cord');
+        element.classList.add('o-balloon__cord');
         return element;
     };
     return Cord;
@@ -41,7 +60,7 @@ var Head = (function () {
     }
     Head.prototype.create = function () {
         var element = document.createElement('SPAN');
-        element.classList.add('balloon__head');
+        element.classList.add('o-balloon__head');
         element.style.background = this._color;
         return element;
     };
@@ -53,38 +72,64 @@ var Leg = (function () {
     }
     Leg.prototype.create = function () {
         var element = document.createElement('SPAN');
-        element.classList.add('balloon__leg');
+        element.classList.add('o-balloon__leg');
         element.style.background = this._color;
         return element;
     };
     return Leg;
 }());
-var Nuvem = (function () {
-    function Nuvem(top, left) {
-        this._top = top;
-        this._left = left;
+function buildClouds() {
+    var nuvens = 5;
+    for (var i = 0; i < nuvens; i++) {
+        var top_1 = parseInt(Math.random() * 500);
+        var left = parseInt(Math.random() * 900);
+        document.body.appendChild(new Cloud(top_1, left).create());
     }
-    Nuvem.prototype.create = function () {
-        var cloud = document.createElement('DIV');
-        cloud.classList.add('cloud--1');
-        cloud.style.top = this._top + "px";
-        cloud.style.left = this._left + "px";
-        for (var i = 2; i <= 5; i++) {
-            var child = document.createElement('DIV');
-            child.classList.add("cloud--" + i);
-            cloud.appendChild(child);
-        }
-        return cloud;
-    };
-    return Nuvem;
-}());
-var nuvens = 5;
-for (var i = 0; i < nuvens; i++) {
-    var top_1 = parseInt(Math.random() * 500);
-    var left = parseInt(Math.random() * 900);
-    document.body.appendChild(new Nuvem(top_1, left).create());
 }
-setInterval(function () {
-    var left = parseInt(Math.random() * 1280);
-    document.body.appendChild(new Balloon(left).create());
-}, 1000);
+function insertingBalloons() {
+    setInterval(function () {
+        var left = parseInt(Math.random() * 1280);
+        document.body.appendChild(new Balloon(left).create());
+    }, 1000);
+}
+function insertScore() {
+    document.body.appendChild(new Score().create());
+}
+function playSound() {
+    var sound = new Audio('asserts/sounds/game.mp3');
+    sound.play();
+}
+function startGame() {
+    document.body.removeChild(document.getElementsByClassName('o-info--play')[0]);
+    playSound();
+    insertScore();
+    buildClouds();
+    insertingBalloons();
+}
+function score(ballon) {
+    var score = document.getElementsByClassName('o-score')[0];
+    var sound = new Audio('asserts/sounds/score.mp3');
+    sound.play();
+    score.textContent = parseInt(score.textContent) + 1;
+    document.body.removeChild(ballon);
+}
+window.addEventListener('keyup', function (e) {
+    var SPACE_CODE = 32;
+    if (e.keyCode === SPACE_CODE)
+        startGame();
+});
+window.addEventListener('click', function (e) {
+    if (e.target.classList.contains('o-balloon'))
+        score(e.target);
+});
+var Score = (function () {
+    function Score() {
+    }
+    Score.prototype.create = function () {
+        var score = document.createElement('SPAN');
+        score.classList.add('o-score');
+        score.textContent = '0';
+        return score;
+    };
+    return Score;
+}());
